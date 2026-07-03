@@ -10,12 +10,12 @@ export default function SectionLetter({ onNext }: { onNext: () => void }) {
         <div className="text-center mb-6">
           <h2 className="font-cormorant italic" style={{ fontSize: 'clamp(2.5rem,5vw,4rem)', fontWeight: 600, color: 'var(--ink)' }}>Happy Birthday</h2>
           <p className="text-xs tracking-[4px] uppercase mt-2" style={{ color: 'var(--rose)', fontFamily: 'sans-serif', fontWeight: 600 }}>HAPPY BIRTHDAY SAYANGKUUU 🤍</p>
-          <p className="font-dancing mt-3" style={{ fontSize: '1.3rem', color: 'var(--rose)' }}>4 Juli 2005 — hari paling indah dalam hidupku</p>
+          <p className="font-dancing mt-3" style={{ fontSize: '1.3rem', color: 'var(--rose)' }}>4 Juli 2005</p>
         </div>
 
         <div className="text-left leading-relaxed" style={{ fontSize: 'clamp(0.95rem,1.8vw,1.15rem)', color: 'var(--ink)', fontFamily: 'Lato, sans-serif', fontWeight: 400, lineHeight: 1.8 }}>
-          <p className="mb-4">Selamat ulang tahun yaa cintaa! Hari ini hari yang spesial banget karena hari ini adalah hari lahir orang yang paling berarti di hidupku.</p>
-          <p className="mb-4">Terima kasih sudah selalu ada, sudah bikin hari-hariku lebih bahagia, dan sudah menjadi alasan aku tersenyum setiap hari. Aku bersyukur banget bisa kenal dan punya sayang sampai sekarang.</p>
+          <p className="mb-4">Selamat ulang tahun yaa sayangg! Hari ini hari yang spesial banget karena hari ini adalah hari lahir orang yang paling berarti di hidupku.</p>
+          <p className="mb-4">Terima kasih sudah selalu ada, sudah bikin hari-hariku lebih bahagia, dan sudah menjadi alasan aku tersenyum setiap hari. Aku bersyukur banget bisa kenal dan punya kamu sampai sekarang.</p>
           <p>Di umur yang baru ini, aku cuma mau doain yang terbaik buat kamu. Semoga kamu selalu sehat, bahagia, dan dikelilingi hal-hal yang kamu cintai. 🤍</p>
         </div>
 
