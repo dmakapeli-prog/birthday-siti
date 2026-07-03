@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #0d0a10;
+  --rose: #c4a0a0;
+  --rose-light: #e8c5c8;
+  --rose-gold: #d4af37;
+  --card: rgba(30,20,25,0.85);
+  --border: rgba(196,160,160,0.25);
+}
+
+body {
+  background: var(--bg);
+  font-family: 'Cormorant Garamond', serif;
+  overflow: hidden;
+}
+
+.font-cormorant { font-family: 'Cormorant Garamond', serif; }
+.font-dancing { font-family: 'Dancing Script', cursive; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+@keyframes shootingStar {
+  0% { transform: translateX(-100px) translateY(0) rotate(-30deg); opacity: 1; }
+  100% { transform: translateX(800px) translateY(200px) rotate(-30deg); opacity: 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 15px rgba(196,160,160,0.3); }
+  50% { box-shadow: 0 0 35px rgba(196,160,160,0.7), 0 0 60px rgba(196,160,160,0.3); }
+}
