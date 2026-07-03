@@ -23,6 +23,8 @@ export default function SectionVideo({ onNext }: { onNext: () => void }) {
           className="w-full"
           style={{ maxHeight: '55vh', objectFit: 'cover', background: '#ffe4ec' }}
           onEnded={() => setPlaying(false)}
+          muted
+          playsInline
         >
           <source src="/video/video-ulang-tahun.mp4" type="video/mp4" />
         </video>

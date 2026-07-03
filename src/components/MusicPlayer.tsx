@@ -1,46 +1,31 @@
 "use client"
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export default function MusicPlayer() {
   const [playing, setPlaying] = useState(false)
-  const audioCtx = useRef<AudioContext | null>(null)
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
-  const noteIdx = useRef(0)
-  const notes = [261.63, 293.66, 329.63, 349.23, 392, 349.23, 329.63, 261.63,
-                  293.66, 261.63, 246.94, 261.63, 293.66, 261.63]
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  function playNote() {
-    if (!audioCtx.current) return
-    const ctx = audioCtx.current
-    const freq = notes[noteIdx.current % notes.length]
-    noteIdx.current++
-    const gain = ctx.createGain()
-    gain.gain.setValueAtTime(0.001, ctx.currentTime)
-    gain.gain.linearRampToValueAtTime(0.07, ctx.currentTime + 0.04)
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6)
-    gain.connect(ctx.destination)
-    const osc = ctx.createOscillator()
-    osc.type = 'sine'
-    osc.frequency.value = freq
-    osc.connect(gain)
-    osc.start(ctx.currentTime)
-    osc.stop(ctx.currentTime + 0.65)
-  }
+  useEffect(() => {
+    const audio = new Audio('/audio/lagu-ultah.mp3')
+    audio.loop = true
+    audioRef.current = audio
+
+    return () => {
+      audio.pause()
+    }
+  }, [])
 
   function toggleMusic() {
-    if (!audioCtx.current) {
-      audioCtx.current = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)()
-    }
+    if (!audioRef.current) return
     if (playing) {
-      if (timerRef.current) clearInterval(timerRef.current)
+      audioRef.current.pause()
       setPlaying(false)
     } else {
-      if (audioCtx.current.state === 'suspended') {
-        audioCtx.current.resume()
-      }
-      playNote()
-      timerRef.current = setInterval(playNote, 650)
-      setPlaying(true)
+      audioRef.current.play().then(() => {
+        setPlaying(true)
+      }).catch((e) => {
+        console.error("Gagal memutar audio, pastikan file public/audio/lagu-ultah.mp3 ada:", e)
+      })
     }
   }
 
