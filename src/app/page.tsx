@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import StarBackground from '@/components/StarBackground'
 import MusicPlayer from '@/components/MusicPlayer'
 import NavDots from '@/components/NavDots'
@@ -18,17 +18,70 @@ export default function Home() {
   const [current, setCurrent] = useState(0)
   const [animating, setAnimating] = useState(false)
 
-  function goTo(index: number) {
+  const goTo = useCallback((index: number) => {
     if (animating || index === current) return
     setAnimating(true)
     setTimeout(() => {
       setCurrent(index)
       setAnimating(false)
     }, 300)
-  }
+  }, [animating, current])
 
-  function next() { if (current < TOTAL - 1) goTo(current + 1) }
-  function replay() { goTo(0) }
+  const next = useCallback(() => {
+    if (current < TOTAL - 1) goTo(current + 1)
+  }, [current, goTo])
+
+  const prev = useCallback(() => {
+    if (current > 0) goTo(current - 1)
+  }, [current, goTo])
+
+  const replay = useCallback(() => {
+    goTo(0)
+  }, [goTo])
+
+  useEffect(() => {
+    let touchStartY = 0
+    let touchStartX = 0
+
+    function handleWheel(e: WheelEvent) {
+      if (animating) return
+      if (Math.abs(e.deltaY) > 30) {
+        if (e.deltaY > 0) {
+          next()
+        } else if (e.deltaY < 0) {
+          prev()
+        }
+      }
+    }
+
+    function handleTouchStart(e: TouchEvent) {
+      touchStartY = e.touches[0].clientY
+      touchStartX = e.touches[0].clientX
+    }
+
+    function handleTouchEnd(e: TouchEvent) {
+      if (animating) return
+      const deltaY = touchStartY - e.changedTouches[0].clientY
+      const deltaX = touchStartX - e.changedTouches[0].clientX
+      
+      if (Math.abs(deltaY) > 50 && Math.abs(deltaY) > Math.abs(deltaX)) {
+        if (deltaY > 0) {
+          next()
+        } else if (deltaY < 0) {
+          prev()
+        }
+      }
+    }
+
+    window.addEventListener('wheel', handleWheel)
+    window.addEventListener('touchstart', handleTouchStart)
+    window.addEventListener('touchend', handleTouchEnd)
+    return () => {
+      window.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchend', handleTouchEnd)
+    }
+  }, [animating, next, prev])
 
   const sections = [
     <SectionCountdown key="0" onNext={next} />,
