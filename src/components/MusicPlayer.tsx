@@ -47,15 +47,15 @@ export default function MusicPlayer() {
   return (
     <button
       onClick={toggleMusic}
-      className="fixed bottom-6 left-6 z-50 flex items-center gap-3 px-4 py-3 rounded-full border text-white text-sm font-light tracking-widest uppercase transition-all"
-      style={{ background: 'rgba(30,20,25,0.85)', borderColor: 'var(--border)', backdropFilter: 'blur(10px)' }}
+      className="fixed bottom-6 left-6 z-50 flex items-center gap-3 px-4 py-3 rounded-full border text-sm font-light tracking-widest uppercase transition-all shadow-sm"
+      style={{ background: 'var(--card)', borderColor: 'var(--border)', backdropFilter: 'blur(10px)', color: 'var(--ink)', boxShadow: '0 5px 20px rgba(232,130,159,0.15)' }}
     >
       <span style={{ 
         display: 'inline-block', 
         animation: playing ? 'spin 4s linear infinite' : 'none',
         fontSize: '1rem'
       }}>♪</span>
-      <span style={{ color: 'var(--rose-light)' }}>{playing ? 'Music On' : 'Music Off'}</span>
+      <span style={{ color: 'var(--ink)', fontWeight: 500 }}>{playing ? 'Music On' : 'Music Off'}</span>
     </button>
   )
 }

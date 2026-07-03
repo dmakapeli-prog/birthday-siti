@@ -42,7 +42,7 @@ export default function Home() {
   ]
 
   return (
-    <main className="relative w-screen h-screen overflow-hidden" style={{ background: 'var(--bg)' }}>
+    <main className="relative w-screen h-screen overflow-hidden" style={{ background: 'radial-gradient(circle at center, #ffeef3 0%, var(--bg) 60%, var(--bg-deep) 100%)', color: 'var(--ink)' }}>
       <StarBackground />
       <MusicPlayer />
       <NavDots current={current} total={TOTAL} onDotClick={goTo} />

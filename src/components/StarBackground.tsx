@@ -39,14 +39,14 @@ export default function StarBackground() {
         const a = 0.3 + Math.sin(s.twinkle) * 0.4
         ctx.beginPath()
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(255,255,255,${a})`
+        ctx.fillStyle = `rgba(232,130,159,${a})`;
         ctx.fill()
       })
 
       if (shootActive) {
         ctx.save()
         ctx.globalAlpha = shootAlpha
-        ctx.strokeStyle = '#ffffff'
+        ctx.strokeStyle = 'rgba(232,130,159,0.8)';
         ctx.lineWidth = 1.5
         ctx.beginPath()
         ctx.moveTo(shootX, shootY)

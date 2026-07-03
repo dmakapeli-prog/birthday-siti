@@ -17,8 +17,8 @@ export default function NavDots({ current, total, onDotClick }: Props) {
           style={{
             width: i === current ? '12px' : '9px',
             height: i === current ? '12px' : '9px',
-            background: i === current ? 'var(--rose)' : 'rgba(255,255,255,0.2)',
-            borderColor: i === current ? 'var(--rose)' : 'rgba(196,160,160,0.3)',
+            background: i === current ? 'var(--rose)' : 'rgba(232,130,159,0.3)',
+            borderColor: i === current ? 'var(--rose)' : 'var(--border)',
             boxShadow: i === current ? '0 0 15px var(--rose)' : 'none'
           }}
         />
