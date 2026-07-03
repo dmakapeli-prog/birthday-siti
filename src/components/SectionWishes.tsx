@@ -2,8 +2,8 @@
 
 export default function SectionWishes({ onNext }: { onNext: () => void }) {
   return (
-    <div className="flex flex-col items-center justify-center h-full px-6">
-      <div className="w-full max-w-2xl rounded-2xl p-8 md:p-12 relative overflow-hidden"
+    <div className="flex flex-col items-center justify-center h-full px-4 sm:px-6">
+      <div className="w-full max-w-2xl rounded-2xl p-6 sm:p-8 md:p-12 relative overflow-hidden"
         style={{ background: 'var(--card)', border: '1px solid var(--border)', backdropFilter: 'blur(16px)', boxShadow: '0 25px 60px rgba(232,130,159,0.2)' }}>
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'linear-gradient(90deg, transparent, var(--rose), transparent)' }} />
         
@@ -20,12 +20,12 @@ export default function SectionWishes({ onNext }: { onNext: () => void }) {
           <p>I love you always. 🤍</p>
         </div>
 
-        <div className="text-center mt-6">
+        <div className="text-center mt-4 sm:mt-6">
           <span style={{ fontSize: '2rem', animation: 'heartbeat 1.5s infinite', display: 'inline-block' }}>🤍</span>
         </div>
 
-        <div className="flex justify-center mt-6">
-          <button onClick={onNext} className="px-8 py-3 rounded-full text-sm tracking-[3px] uppercase transition-all hover:scale-105" style={{ border: '1px solid var(--rose)', color: 'var(--ink)', background: 'rgba(255,255,255,0.5)', fontFamily: 'sans-serif' }}>
+        <div className="flex justify-center mt-4 sm:mt-6">
+          <button onClick={onNext} className="px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm tracking-[3px] uppercase transition-all hover:scale-105 min-h-[44px]" style={{ border: '1px solid var(--rose)', color: 'var(--ink)', background: 'rgba(255,255,255,0.5)', fontFamily: 'sans-serif' }}>
             ONE MORE THING →
           </button>
         </div>

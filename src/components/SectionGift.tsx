@@ -11,13 +11,13 @@ export default function SectionGift({ onNext }: { onNext: () => void }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center px-6"
+    <div className="flex flex-col items-center justify-center h-full text-center px-4 sm:px-6"
       style={{ background: 'radial-gradient(circle at center, rgba(247,168,192,0.3) 0%, transparent 70%)' }}>
-      <div className="text-xs tracking-[6px] uppercase mb-10" style={{ color: 'var(--rose)', fontFamily: 'sans-serif' }}>
+      <div className="text-xs tracking-[4px] sm:tracking-[6px] uppercase mb-6 sm:mb-10" style={{ color: 'var(--rose)', fontFamily: 'sans-serif' }}>
         ✦ ADA SESUATU UNTUKMU ✦
       </div>
 
-      <div onClick={handleClick} className="cursor-pointer flex flex-col items-center" style={{ animation: opened ? 'none' : 'float 3s ease-in-out infinite' }}>
+      <div onClick={handleClick} className="cursor-pointer flex flex-col items-center p-4 min-h-[44px] min-w-[44px]" style={{ animation: opened ? 'none' : 'float 3s ease-in-out infinite' }}>
         {/* Gift box SVG */}
         <svg width="180" height="200" viewBox="0 0 180 200">
           {/* Ribbon bow */}

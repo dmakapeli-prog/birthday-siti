@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 "use client"
 import { useState, useRef } from 'react'
+import Image from 'next/image'
 
 const memories = [
   { src: '/images/memories/momen-1.png', rotate: '-5deg', label: 'momen terbaik 💜' },
@@ -20,7 +20,7 @@ function PolaroidCard({ m }: { m: { src: string; rotate: string; label: string }
 
   return (
     <div
-      className="flex-none w-[200px] sm:w-[235px] snap-center cursor-pointer transition-all duration-300"
+      className="flex-none w-[190px] sm:w-[235px] snap-center cursor-pointer transition-all duration-300"
       style={{
         transform: hovered ? 'scale(1.08) rotate(0deg)' : `rotate(${m.rotate})`,
         zIndex: hovered ? 30 : 1
@@ -35,9 +35,12 @@ function PolaroidCard({ m }: { m: { src: string; rotate: string; label: string }
           boxShadow: hovered ? '0 20px 40px rgba(232,130,159,0.45)' : '0 10px 30px rgba(232,130,159,0.25)'
         }}
       >
-        <img
+        <Image
           src={m.src}
           alt={m.label}
+          width={235}
+          height={235}
+          loading="lazy"
           className="w-full aspect-square object-cover block rounded-sm"
         />
         <p className="text-center text-[#666] text-xs sm:text-sm mt-3 font-dancing leading-tight">

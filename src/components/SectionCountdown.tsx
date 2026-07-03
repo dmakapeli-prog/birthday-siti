@@ -49,20 +49,20 @@ export default function SectionCountdown({ onNext }: { onNext: () => void }) {
           🎉 Hari ini adalah Hari Spesialnya! 🎉
         </div>
       ) : (
-        <div className="flex items-center gap-4 mb-10 flex-wrap justify-center">
+        <div className="grid grid-cols-2 sm:flex sm:items-center gap-3 sm:gap-4 mb-8 sm:mb-10 justify-center max-w-[280px] sm:max-w-none mx-auto">
           {[['HARI', pad(time.days)], ['JAM', pad(time.hours)], ['MENIT', pad(time.mins)], ['DETIK', pad(time.secs)]].map(([label, val], i) => (
             <Fragment key={label}>
-              <div className="flex flex-col items-center rounded-xl px-6 py-4" style={{ background: 'rgba(255,255,255,0.75)', border: '1px solid var(--border)', minWidth: '90px', backdropFilter: 'blur(10px)', boxShadow: '0 10px 30px rgba(232,130,159,0.2)' }}>
-                <span className="font-cormorant font-bold" style={{ fontSize: 'clamp(2rem,5vw,3.2rem)', lineHeight: 1, color: 'var(--ink)' }}>{val}</span>
-                <span className="text-xs tracking-widest mt-2" style={{ color: 'var(--rose)', fontFamily: 'sans-serif', fontWeight: 700 }}>{label}</span>
+              <div className="flex flex-col items-center rounded-xl px-4 sm:px-6 py-3 sm:py-4 w-full sm:w-auto" style={{ background: 'rgba(255,255,255,0.75)', border: '1px solid var(--border)', minWidth: '80px', backdropFilter: 'blur(10px)', boxShadow: '0 10px 30px rgba(232,130,159,0.2)' }}>
+                <span className="font-cormorant font-bold" style={{ fontSize: 'clamp(1.8rem,5vw,3.2rem)', lineHeight: 1, color: 'var(--ink)' }}>{val}</span>
+                <span className="text-[10px] sm:text-xs tracking-widest mt-1.5 sm:mt-2" style={{ color: 'var(--rose)', fontFamily: 'sans-serif', fontWeight: 700 }}>{label}</span>
               </div>
-              {i < 3 && <span className="font-cormorant" style={{ fontSize: '2.5rem', color: 'var(--rose)', animation: 'pulseGlow 1.5s infinite' }}>:</span>}
+              {i < 3 && <span className="font-cormorant hidden sm:inline" style={{ fontSize: '2.5rem', color: 'var(--rose)', animation: 'pulseGlow 1.5s infinite' }}>:</span>}
             </Fragment>
           ))}
         </div>
       )}
 
-      <button onClick={onNext} className="px-10 py-4 rounded-full text-sm tracking-[4px] uppercase transition-all hover:scale-105 font-light" style={{ border: '1px solid var(--rose)', background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(5px)', fontFamily: 'sans-serif', color: 'var(--ink)' }}>
+      <button onClick={onNext} className="px-8 sm:px-10 py-3.5 sm:py-4 rounded-full text-xs sm:text-sm tracking-[3px] sm:tracking-[4px] uppercase transition-all hover:scale-105 font-light min-h-[44px]" style={{ border: '1px solid var(--rose)', background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(5px)', fontFamily: 'sans-serif', color: 'var(--ink)' }}>
         ✦ MULAI PERJALANAN ✦
       </button>
     </div>
