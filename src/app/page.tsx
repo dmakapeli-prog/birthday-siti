@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import StarBackground from '@/components/StarBackground'
 import MusicPlayer from '@/components/MusicPlayer'
 import NavDots from '@/components/NavDots'
@@ -21,10 +22,10 @@ export default function Home() {
   const goTo = useCallback((index: number) => {
     if (animating || index === current) return
     setAnimating(true)
+    setCurrent(index)
     setTimeout(() => {
-      setCurrent(index)
       setAnimating(false)
-    }, 300)
+    }, 650)
   }, [animating, current])
 
   const next = useCallback(() => {
@@ -100,19 +101,33 @@ export default function Home() {
       <MusicPlayer />
       <NavDots current={current} total={TOTAL} onDotClick={goTo} />
 
-      <div
-        style={{
-          opacity: animating ? 0 : 1,
-          transform: animating ? 'translateY(20px)' : 'translateY(0)',
-          transition: 'opacity 0.3s ease, transform 0.3s ease',
-          height: '100%',
-          width: '100%',
-          position: 'relative',
-          zIndex: 10
-        }}
-      >
-        {sections[current]}
-      </div>
+      {/* Parallax background gradient layer moving slightly slower than foreground */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`bg-${current}`}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="absolute inset-0 pointer-events-none z-1"
+          style={{
+            background: `radial-gradient(circle at ${30 + (current % 3) * 20}% ${40 + (current % 2) * 20}%, rgba(247,168,192,0.25) 0%, transparent 60%)`
+          }}
+        />
+      </AnimatePresence>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="w-full h-full relative z-10"
+        >
+          {sections[current]}
+        </motion.div>
+      </AnimatePresence>
     </main>
   )
 }

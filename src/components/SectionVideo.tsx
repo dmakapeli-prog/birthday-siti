@@ -1,5 +1,6 @@
 "use client"
 import { useRef, useState } from 'react'
+import { motion, Variants } from 'framer-motion'
 
 export default function SectionVideo({ onNext }: { onNext: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -11,23 +12,45 @@ export default function SectionVideo({ onNext }: { onNext: () => void }) {
     else { videoRef.current.play(); setPlaying(true) }
   }
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12 }
+    }
+  }
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  }
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.95, y: 25 },
+    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+  }
+
   return (
-    <div className="relative flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 overflow-hidden"
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="relative flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 overflow-hidden"
       style={{
         background: 'radial-gradient(circle at 30% 20%, rgba(247,168,192,0.35) 0%, transparent 55%), radial-gradient(circle at 70% 80%, rgba(214,143,163,0.25) 0%, transparent 55%)'
-      }}>
-
+      }}
+    >
       {/* Floating decorative elements around card */}
       <div className="absolute top-[12%] left-[8%] sm:left-[16%] text-2xl sm:text-3xl pointer-events-none opacity-80" style={{ animation: 'float 4s ease-in-out infinite' }}>🌸</div>
       <div className="absolute bottom-[16%] right-[6%] sm:right-[14%] text-xl sm:text-2xl pointer-events-none opacity-80" style={{ animation: 'float 5s ease-in-out infinite 1s' }}>🤍</div>
       <div className="absolute top-[22%] right-[10%] sm:right-[18%] text-lg sm:text-xl pointer-events-none opacity-70" style={{ animation: 'twinkle 3s ease-in-out infinite' }}>✨</div>
 
-      <div className="relative z-10 text-xs tracking-[6px] uppercase mb-2 sm:mb-3" style={{ color: 'var(--rose)', fontFamily: 'sans-serif' }}>✦ A SPECIAL MESSAGE ✦</div>
-      <h2 className="relative z-10 font-cormorant italic mb-1 sm:mb-2" style={{ fontSize: 'clamp(1.8rem,5vw,3.5rem)', color: 'var(--ink)', textShadow: '0 0 30px rgba(232,130,159,0.3)' }}>A Moment For You</h2>
-      <p className="relative z-10 font-dancing mb-4 sm:mb-6" style={{ fontSize: 'clamp(1rem,3vw,1.2rem)', color: 'var(--rose)' }}>✦ a special video message ✦</p>
+      <motion.div variants={itemVariants} className="relative z-10 text-xs tracking-[6px] uppercase mb-2 sm:mb-3" style={{ color: 'var(--rose)', fontFamily: 'sans-serif' }}>✦ A SPECIAL MESSAGE ✦</motion.div>
+      <motion.h2 variants={itemVariants} className="relative z-10 font-cormorant italic mb-1 sm:mb-2" style={{ fontSize: 'clamp(1.8rem,5vw,3.5rem)', color: 'var(--ink)', textShadow: '0 0 30px rgba(232,130,159,0.3)' }}>A Moment For You</motion.h2>
+      <motion.p variants={itemVariants} className="relative z-10 font-dancing mb-4 sm:mb-6" style={{ fontSize: 'clamp(1rem,3vw,1.2rem)', color: 'var(--rose)' }}>✦ a special video message ✦</motion.p>
 
       {/* Gradient border wrapper for scrapbook card feel */}
-      <div className="relative z-10 max-w-2xl w-full p-[2px] rounded-2xl transition-all duration-300"
+      <motion.div variants={cardVariants} className="relative z-10 max-w-2xl w-full p-[2px] rounded-2xl transition-all duration-300"
         style={{
           background: 'linear-gradient(135deg, var(--rose) 0%, var(--rose-gold) 50%, var(--rose-light) 100%)',
           boxShadow: '0 25px 70px rgba(232,130,159,0.35)'
@@ -77,15 +100,14 @@ export default function SectionVideo({ onNext }: { onNext: () => void }) {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
 
-      <p className="relative z-10 mt-3 text-xs sm:text-sm" style={{ color: 'var(--rose)', fontFamily: 'sans-serif' }}>
+      <motion.p variants={itemVariants} className="relative z-10 mt-3 text-xs sm:text-sm" style={{ color: 'var(--rose)', fontFamily: 'sans-serif' }}>
+      </motion.p>
 
-      </p>
-
-      <button onClick={onNext} className="relative z-10 mt-4 sm:mt-6 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm tracking-[3px] uppercase transition-all duration-300 hover:scale-105 hover:bg-[var(--rose)] hover:text-white hover:border-[var(--rose)] hover:shadow-lg min-h-[44px]" style={{ border: '1px solid var(--rose)', color: 'var(--ink)', background: 'rgba(255,255,255,0.6)', fontFamily: 'sans-serif' }}>
+      <motion.button variants={itemVariants} onClick={onNext} className="relative z-10 mt-4 sm:mt-6 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm tracking-[3px] uppercase transition-all duration-300 hover:scale-105 hover:bg-[var(--rose)] hover:text-white hover:border-[var(--rose)] hover:shadow-lg min-h-[44px]" style={{ border: '1px solid var(--rose)', color: 'var(--ink)', background: 'rgba(255,255,255,0.6)', fontFamily: 'sans-serif' }}>
         BIRTHDAY WISHES →
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   )
 }

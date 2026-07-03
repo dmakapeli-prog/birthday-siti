@@ -1,6 +1,7 @@
 "use client"
 import { useState, useRef } from 'react'
 import Image from 'next/image'
+import { motion, Variants } from 'framer-motion'
 
 const memories = [
   { src: '/images/memories/momen-1.png', rotate: '-5deg', label: 'momen terbaik 💜' },
@@ -60,15 +61,33 @@ export default function SectionMemories({ onNext }: { onNext: () => void }) {
     }
   }
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12 }
+    }
+  }
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 25 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center h-full px-6 py-4 w-full max-w-6xl mx-auto overflow-hidden">
-      <h2 className="font-cormorant italic mb-1" style={{ fontSize: 'clamp(2.5rem,6vw,4.2rem)', color: 'var(--ink)', textShadow: '0 0 30px rgba(232,130,159,0.3)' }}>
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="flex flex-col items-center justify-center h-full px-6 py-4 w-full max-w-6xl mx-auto overflow-hidden"
+    >
+      <motion.h2 variants={itemVariants} className="font-cormorant italic mb-1" style={{ fontSize: 'clamp(2.5rem,6vw,4.2rem)', color: 'var(--ink)', textShadow: '0 0 30px rgba(232,130,159,0.3)' }}>
         Our Memories
-      </h2>
-      <p className="text-xs tracking-[5px] uppercase mb-4 sm:mb-6" style={{ color: 'var(--rose)', fontFamily: 'sans-serif', fontWeight: 600 }}>✦ every moment captured in love ✦</p>
+      </motion.h2>
+      <motion.p variants={itemVariants} className="text-xs tracking-[5px] uppercase mb-4 sm:mb-6" style={{ color: 'var(--rose)', fontFamily: 'sans-serif', fontWeight: 600 }}>✦ every moment captured in love ✦</motion.p>
       
       {/* Carousel Container */}
-      <div className="relative w-full flex items-center justify-center my-2">
+      <motion.div variants={itemVariants} className="relative w-full flex items-center justify-center my-2">
         <button
           onClick={() => scroll(-280)}
           className="absolute left-1 z-20 w-10 h-10 rounded-full hidden sm:flex items-center justify-center transition-all hover:scale-110 shadow-lg"
@@ -96,15 +115,15 @@ export default function SectionMemories({ onNext }: { onNext: () => void }) {
         >
           ›
         </button>
-      </div>
+      </motion.div>
 
-      <p className="text-xs text-center mt-1 sm:mt-2 mb-4" style={{ color: 'var(--rose)', fontFamily: 'sans-serif' }}>
+      <motion.p variants={itemVariants} className="text-xs text-center mt-1 sm:mt-2 mb-4" style={{ color: 'var(--rose)', fontFamily: 'sans-serif' }}>
         * Geser kanan/kiri untuk melihat 10 momen kita 💕
-      </p>
+      </motion.p>
 
-      <button onClick={onNext} className="px-8 py-3 rounded-full text-sm tracking-[3px] uppercase transition-all hover:scale-105" style={{ border: '1px solid var(--rose)', color: 'var(--ink)', background: 'rgba(255,255,255,0.5)', fontFamily: 'sans-serif' }}>
+      <motion.button variants={itemVariants} onClick={onNext} className="px-8 py-3 rounded-full text-sm tracking-[3px] uppercase transition-all hover:scale-105" style={{ border: '1px solid var(--rose)', color: 'var(--ink)', background: 'rgba(255,255,255,0.5)', fontFamily: 'sans-serif' }}>
         → NEXT
-      </button>
-    </div>
+      </motion.button>
+    </motion.div>
   )
 }
