@@ -5,7 +5,7 @@ const polaroids = [
   { src: '/images/hero/foto-1.jpg', rotate: '-12deg', top: '12%', left: '6%' },
   { src: '/images/hero/foto-2.jpg', rotate: '8deg', top: '10%', right: '6%' },
   { src: '/images/hero/foto-3.jpg', rotate: '-6deg', bottom: '12%', left: '8%' },
-  { src: '/images/hero/foto-4.jpg', rotate: '12deg', bottom: '10%', right: '6%' },
+  { src: '/images/hero/foto-4.png', rotate: '12deg', bottom: '10%', right: '6%' },
 ]
 
 export default function SectionHero({ onNext }: { onNext: () => void }) {
