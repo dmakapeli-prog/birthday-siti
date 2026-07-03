@@ -11,17 +11,6 @@ export default function SectionGift({ onNext }: { onNext: () => void }) {
     setTimeout(onNext, 1800)
   }
 
-  // Generate 36 confetti particles for explosive celebration effect
-  const confetti = Array.from({ length: 36 }, (_, i) => {
-    const angle = (i * 10 + (Math.random() * 8 - 4)) * (Math.PI / 180)
-    const dist = 120 + Math.random() * 200
-    const x = Math.cos(angle) * dist
-    const y = Math.sin(angle) * dist - 60 // upward arc bias
-    const rotate = Math.random() * 540
-    const colors = ['#e8829f', '#f7a8c0', '#ffd1dc', '#ffffff', '#d68fa3', '#ffbecc']
-    return { x, y, rotate, color: colors[i % colors.length], size: 8 + Math.random() * 8 }
-  })
-
   return (
     <div className="relative flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 overflow-hidden"
       style={{ background: 'radial-gradient(circle at center, rgba(247,168,192,0.3) 0%, transparent 70%)' }}>
@@ -42,8 +31,8 @@ export default function SectionGift({ onNext }: { onNext: () => void }) {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={
           opened
-            ? { scale: [1, 1.15, 1], rotate: 0 }
-            : { y: [0, -14, 0], rotate: [-2.5, 2.5, -2.5] }
+            ? { scale: [1, 1.15, 1], rotate: 0, opacity: 1 }
+            : { y: [0, -14, 0], rotate: [-2.5, 2.5, -2.5], opacity: 1 }
         }
         transition={
           opened
@@ -54,38 +43,6 @@ export default function SectionGift({ onNext }: { onNext: () => void }) {
               }
         }
       >
-        {/* Short Light Burst effect when gift is opened */}
-        {opened && (
-          <motion.div
-            initial={{ scale: 0, opacity: 1 }}
-            animate={{ scale: [0, 5, 8], opacity: [1, 0.8, 0] }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full pointer-events-none z-10"
-            style={{
-              background: 'radial-gradient(circle, rgba(255,245,210,0.9) 0%, rgba(247,168,192,0.6) 50%, transparent 100%)',
-              filter: 'blur(10px)'
-            }}
-          />
-        )}
-
-        {/* Confetti & Petal burst */}
-        {opened &&
-          confetti.map((c, i) => (
-            <motion.div
-              key={i}
-              initial={{ x: 0, y: 0, scale: 0, opacity: 1 }}
-              animate={{ x: c.x, y: c.y, scale: [0, 1.2, 0.6], rotate: c.rotate, opacity: [1, 1, 0] }}
-              transition={{ duration: 1.4, ease: 'easeOut' }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none z-30"
-              style={{
-                width: c.size,
-                height: c.size,
-                backgroundColor: c.color,
-                boxShadow: `0 0 12px ${c.color}`
-              }}
-            />
-          ))}
-
         {/* Gift box SVG */}
         <svg width="180" height="200" viewBox="0 0 180 200" className="relative z-20">
           {/* Ribbon bow */}
